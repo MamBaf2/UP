@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace УП
 {
@@ -40,10 +41,10 @@ namespace УП
             int denominator = Factorial(n - m) * Factorial(m);
             return numerator / denominator;
         }
+        private int n, m;
         private void btnCombin_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(txtN.Text);
-            int m = int.Parse(txtM.Text);
+            check(); // вызываем метод проверки перед вычислением Combination
             int result = Combination(n, m);
             lblCombin.Text = result.ToString();
             ClearFields();
@@ -51,8 +52,7 @@ namespace УП
 
         private void btnPlace_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(txtN.Text);
-            int m = int.Parse(txtM.Text);
+            check();
             int result = Place(n, m);
             lblPlace.Text = result.ToString();
             ClearFields();
@@ -60,7 +60,7 @@ namespace УП
 
         private void btnPermut_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(txtN.Text);
+            check();
             int result = Factorial(n);
             lblPermut.Text = result.ToString();
             ClearFields();
@@ -71,14 +71,43 @@ namespace УП
             txtN.Text = "";
             txtM.Text = "";
         }
+        private void ClearLbl()
+        {
+            lblCombin.Text = "";
+            lblPermut.Text = "";
+            lblPlace.Text = "";
+        }
         private void txtN_TextChanged(object sender, EventArgs e)
         {
-
+            txtN.MaxLength = 5;
         }
 
         private void txtM_TextChanged(object sender, EventArgs e)
         {
+            txtM.MaxLength = 5;
+        }
+        private void check()
+        {
+            bool nParsed = int.TryParse(txtN.Text, out n);
+            bool mParsed = int.TryParse(txtM.Text, out m);
 
+            if (!nParsed || n <= 0 || !mParsed || m <= 0)
+            {
+                string errorMessage = "";
+
+                if (!nParsed || n <= 0)
+                {
+                    errorMessage += "Неверное число n. ";
+                }
+
+                if (!mParsed || m <= 0)
+                {
+                    errorMessage += "Неверное число m. ";
+                }
+                MessageBox.Show(errorMessage.Trim(), "Ошибка");
+                return;
+            }
         }
     }
 }
+
