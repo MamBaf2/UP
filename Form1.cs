@@ -18,7 +18,7 @@ namespace УП
             InitializeComponent();
         }
         //метод Факториала (перестановки)
-        private int Factorial(int n)
+        private int Factorial(int n) 
         {
             int result = 1;
             for (int i = 1; i <= n; i++)
