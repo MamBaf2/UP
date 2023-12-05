@@ -44,23 +44,26 @@ namespace УП
         private int n, m;
         private void btnCombin_Click(object sender, EventArgs e)
         {
-            check(); // вызываем метод проверки перед вычислением Combination
+            if (!check()) return;
+            int n = int.Parse(txtN.Text);
+            int m = int.Parse(txtM.Text);
             int result = Combination(n, m);
             lblCombin.Text = result.ToString();
             ClearFields();
         }
-
         private void btnPlace_Click(object sender, EventArgs e)
         {
-            check();
+            if (!check()) return;
+            int n = int.Parse(txtN.Text);
+            int m = int.Parse(txtM.Text);
             int result = Place(n, m);
             lblPlace.Text = result.ToString();
             ClearFields();
         }
-
         private void btnPermut_Click(object sender, EventArgs e)
         {
-            check();
+            if (!check()) return;
+            int n = int.Parse(txtN.Text);
             int result = Factorial(n);
             lblPermut.Text = result.ToString();
             ClearFields();
@@ -71,42 +74,29 @@ namespace УП
             txtN.Text = "";
             txtM.Text = "";
         }
-        private void ClearLbl()
-        {
-            lblCombin.Text = "";
-            lblPermut.Text = "";
-            lblPlace.Text = "";
-        }
         private void txtN_TextChanged(object sender, EventArgs e)
         {
-            txtN.MaxLength = 5;
+            txtN.MaxLength = 2;
         }
-
         private void txtM_TextChanged(object sender, EventArgs e)
         {
-            txtM.MaxLength = 5;
+            txtM.MaxLength = 2;
         }
-        private void check()
+        private bool check()
         {
-            bool nParsed = int.TryParse(txtN.Text, out n);
-            bool mParsed = int.TryParse(txtM.Text, out m);
-
-            if (!nParsed || n <= 0 || !mParsed || m <= 0)
+            if (string.IsNullOrWhiteSpace(txtN.Text) || string.IsNullOrWhiteSpace(txtM.Text))
             {
-                string errorMessage = "";
-
-                if (!nParsed || n <= 0)
-                {
-                    errorMessage += "Неверное число n. ";
-                }
-
-                if (!mParsed || m <= 0)
-                {
-                    errorMessage += "Неверное число m. ";
-                }
-                MessageBox.Show(errorMessage.Trim(), "Ошибка");
-                return;
+                MessageBox.Show("Поля не должны быть пустыми", "Ошибка");
+                return false;
             }
+
+            int n, m;
+            if (!int.TryParse(txtN.Text, out n) || !int.TryParse(txtM.Text, out m) || n <= 0 || m <= 0)
+            {
+                MessageBox.Show("Поля должны содержать только положительные целые числа", "Ошибка");
+                return false;
+            }
+            return true;
         }
     }
 }
