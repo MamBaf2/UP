@@ -21,6 +21,7 @@ namespace УП
         private int Factorial(int n) 
         {
             int result = 1;
+            //цикл от 1 до n
             for (int i = 1; i <= n; i++)
             {
                 result *= i;
@@ -42,27 +43,34 @@ namespace УП
             return numerator / denominator;
         }
         private int n, m;
+        //кнопка Сочетание
         private void btnCombin_Click(object sender, EventArgs e)
         {
+            // Проверка корректности введенных данных перед вычислением(отрицательная проверка)
             if (!check()) return;
+            //получение данных из текст поля
             int n = int.Parse(txtN.Text);
             int m = int.Parse(txtM.Text);
             int result = Combination(n, m);
+            // Отображение результата на форме
             lblCombin.Text = result.ToString();
             ClearFields();
         }
+        //кнопка Размещение
         private void btnPlace_Click(object sender, EventArgs e)
         {
             if (!check()) return;
             int n = int.Parse(txtN.Text);
             int m = int.Parse(txtM.Text);
+            // Вычисление результата
             int result = Place(n, m);
             lblPlace.Text = result.ToString();
             ClearFields();
         }
+        //кнопка перестановки
         private void btnPermut_Click(object sender, EventArgs e)
         {
-            if (!check()) return;
+            if (!checkFac()) return;
             int n = int.Parse(txtN.Text);
             int result = Factorial(n);
             lblPermut.Text = result.ToString();
@@ -74,16 +82,39 @@ namespace УП
             txtN.Text = "";
             txtM.Text = "";
         }
+        //текстовое поле n
         private void txtN_TextChanged(object sender, EventArgs e)
         {
+            //макс кол-во символов
             txtN.MaxLength = 2;
+            //проверка текста на числа
+            if (!int.TryParse(txtN.Text, out int number))
+            {
+                txtN.Text = "";
+            }
+            //проверка диапазона
+            else if (number > 15 || number < 1)
+            {
+                MessageBox.Show("Введите число от 1 до 15 ");
+                txtN.Text = "";
+            }
         }
         private void txtM_TextChanged(object sender, EventArgs e)
         {
             txtM.MaxLength = 2;
+            if (!int.TryParse(txtM.Text, out int number))
+            {
+                txtM.Text = "";
+            }
+            else if (number > 15 || number < 1)
+            {
+                MessageBox.Show("Число должно быть от 1 до 15.");
+                txtM.Text = "";
+            }
         }
         private bool check()
         {
+            //если поле пустое
             if (string.IsNullOrWhiteSpace(txtN.Text) || string.IsNullOrWhiteSpace(txtM.Text))
             {
                 MessageBox.Show("Поля не должны быть пустыми", "Ошибка");
@@ -91,13 +122,18 @@ namespace УП
             }
 
             int n, m;
-            if (!int.TryParse(txtN.Text, out n) || !int.TryParse(txtM.Text, out m) || n <= 0 || m <= 0)
+            return true;
+        }
+        private bool checkFac()
+        {
+            if (string.IsNullOrWhiteSpace(txtN.Text))
             {
-                MessageBox.Show("Поля должны содержать только положительные целые числа", "Ошибка");
+                MessageBox.Show("Поля не должны быть пустыми", "Ошибка");
                 return false;
             }
             return true;
         }
     }
+
 }
 
