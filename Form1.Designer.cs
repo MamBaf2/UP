@@ -75,7 +75,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(45, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(443, 160);
+            this.label3.Size = new System.Drawing.Size(443, 220);
             this.label3.TabIndex = 3;
             this.label3.Text = resources.GetString("label3.Text");
             // 

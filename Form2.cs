@@ -18,16 +18,16 @@ namespace УП
         private int scorePlayerY = 0; // Переменная для подсчета очков игрока Y
         public Form2()
         {
-            InitializeComponent();
-            InitializeButtons(); //инициализируем
-            UpdateScores();
+            InitializeComponent(); 
+            InitializeButtons(); 
+            UpdateScores(); 
 
         }
         private void InitializeButtons()
         {
-            foreach (Control control in Controls)
+            foreach (Control control in Controls) // Перебираем все элементы управления на форме
             {
-                if (control is Button button)
+                if (control is Button button) // Проверяем, является ли текущий элемент управления кнопкой
                 {
                     button.Click += Button_Click; // Привязываем обработчик события нажатия на кнопку
                 }
@@ -37,7 +37,7 @@ namespace УП
         // Обработчик события нажатия на кнопку
         private void Button_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
+            Button button = (Button)sender; // Получаем кнопку, на которую было совершено нажатие
 
             if (button.Text == "") // Проверяем, что кнопка пуста (еще не была нажата)
             {
@@ -88,6 +88,7 @@ namespace УП
         // Метод для проверки комбинации кнопок на победу
         private bool CheckCombination(Button b1, Button b2, Button b3)
         {
+            // Проверяем, что текст на кнопках не пустой и одинаковый для всех трех кнопок
             return (b1.Text != "" && b1.Text == b2.Text && b2.Text == b3.Text);
         }
 
@@ -109,7 +110,7 @@ namespace УП
         private void UpdateScores()
         {
             lblX.Text = $"Игрок X: {scorePlayerX}";
-            lblY.Text = $"Игрок Y: {scorePlayerY}";
+            lblY.Text = $"Игрок O: {scorePlayerY}";
         }
     }
 }
