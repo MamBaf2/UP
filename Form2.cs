@@ -36,7 +36,7 @@ namespace УП
                 // Вычисление каждого значения X, мы устанавливаем значение X[i] в Xmin, увеличивая его на Step с каждой итерацией
                 X[i] = Xmin + Step * i;
                 // Вычисляем значение функции y в точке X. 
-                y[i] = Math.Pow(2, Math.Pow(y1, X[i])) + Math.Pow(3, X[i]) * Math.Pow(y1, X[i]) - (y1 * (Math.Atan(z) - Math.PI / 6)) / (Math.Abs(X[i]) + (1 / (Math.Pow(y1, 2) + 1)));
+                y[i] = Math.Pow(2, Math.Pow(y1, X[i])) + Math.Pow(Math.Pow(3, X[i]), y1) - (y1 * (Math.Atan(z) - Math.PI / 6)) / (Math.Abs(X[i]) + (1 / (Math.Pow(y1, 2) + 1)));
             }
             // Настройка оси X на графике
              chart1.ChartAreas[0].AxisX.Minimum = Xmin;
