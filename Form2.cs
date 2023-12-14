@@ -12,10 +12,11 @@ namespace УП
 {
     public partial class Form2 : Form
     {
-        private bool currentPlayerX = true; // Переменная для отслеживания текущего игрока (true - X, false - O)
-        private int moveCount = 0; // Переменная для подсчета количества ходов
-        private int scorePlayerX = 0; // Переменная для подсчета очков игрока X
-        private int scorePlayerY = 0; // Переменная для подсчета очков игрока Y
+        //определение хода, подсчёт ходов и очков
+        private bool currentPlayerX = true; 
+        private int moveCount = 0; 
+        private int scorePlayerX = 0; 
+        private int scorePlayerY = 0; 
         public Form2()
         {
             InitializeComponent(); 
@@ -80,8 +81,8 @@ namespace УП
                 else
                     scorePlayerY++;
 
-                UpdateScores(); // Обновляем метки с очками
-                ResetGame(); // Сбрасываем игру
+                UpdateScores(); 
+                ResetGame(); 
             }
         }
 
@@ -95,8 +96,10 @@ namespace УП
         // Метод для сброса игры
         private void ResetGame()
         {
+            //переборка всех элементов
             foreach (Control control in Controls)
             {
+                //если это кнопка
                 if (control is Button button)
                 {
                     button.Text = ""; // Очищаем текст на кнопках
