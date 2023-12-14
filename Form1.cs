@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace УП
 {
@@ -19,19 +20,23 @@ namespace УП
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            double basePrice = 1000; // Базовая цена билета в рублях
-            double discount = 0.05; // Скидка для детей и пенсионеров
-            double returnTicketMultiplier = 2; // Множитель для обратного билета
+            //базовая цена, скидка, множитель для обратного билета
+            double basePrice = 1000; 
+            double discount = 0.05; 
+            double returnTicketMultiplier = 2;
 
             // Получение выбранных данных из элементов управления на форме
-            int routeChoice = cmbVarR.SelectedIndex + 1; // Выбранный индекс в комбо-боксе для рейса
-            int wagonTypeChoice = cmbTypeV.SelectedIndex + 1; // Выбранный индекс в комбо-боксе для типа вагона
-            int adultCount = Convert.ToInt32(numAdults.Value); // Количество взрослых из Numeric Up Down
-            int childCount = Convert.ToInt32(numChild.Value); // Количество детей из Numeric Up Down
-            bool hasLinen = chkBel.Checked; // Указание на наличие белья через флажок
-            bool hasFood = chkPit.Checked; // Указание на наличие питания через флажок
-            bool hasLuggage = chkBag.Checked; // Указание на наличие багажа через флажок
-            bool isReturnTicket = chkObrB.Checked; // Проверка, выбран ли обратный билет
+            
+            int routeChoice = cmbVarR.SelectedIndex + 1; //выбор рейса 
+            int wagonTypeChoice = cmbTypeV.SelectedIndex + 1; // тип вагона 
+            
+            int adultCount = Convert.ToInt32(numAdults.Value); // Количество взрослых 
+            int childCount = Convert.ToInt32(numChild.Value); // Количество детей 
+            
+            bool hasLinen = chkBel.Checked; // бельё 
+            bool hasFood = chkPit.Checked; //питание
+            bool hasLuggage = chkBag.Checked; // багаж
+            bool isReturnTicket = chkObrB.Checked; // обратный билет(проверка)
 
             // Расчет стоимости билета на основе количества пассажиров и базовой цены
             double totalPassengers = adultCount + childCount;
@@ -51,7 +56,7 @@ namespace УП
             {
                 totalPrice *= returnTicketMultiplier;
             }
-            // Отображение стоимости билета в диалоговом окне
+            
             MessageBox.Show($"Стоимость билета: {totalPrice} руб.");
         }
     }
